@@ -1,0 +1,351 @@
+/*
+ * SEOmonitor API Documentation
+ * `Introduction`  The SEOmonitor API allows you to programmatically access keyword ranking, traffic, and other SEO data from the SEOmonitor platform. You can use the API to build custom reports, automate workflows, and integrate SEOmonitor data into your own applications. The API enables free and unrestricted access to all your data in the platform, for all Tracked Campaigns. Additionally, it provides access to SEOmonitor's curated UK and US keyword database.   `Main Capabilities`  These are the main data sets you can retrieve with the API 3.0 endpoints:  `Campaign-level data`: Campaign details and campaign-wide keyword data, landing page data, groups data, traffic data, content opportunities data, forecast data, or campaign website research data.  `Keyword-level data`: Data for any and all keywords in the campaign, including ranking data, search data, SERP data, competitor data, SEO Opportunity, keyword-level traffic data, content optimization opportunities' data by keyword and keyword-level forecast projections data.  `Keyword group-level data`: Data for any keyword group in the campaign, including aggregated search and SERP data, website Visibility on specific groups, group SEO Opportunity data.  `Landing page-level data`: Data for specific landing pages that are ranking with the keywords in the campaign, including aggregated search and SERP data, SEO Opportunity, and landing page Visibility.  `Organic traffic data`: Data for the website's organic sessions, conversions, and revenue, including traffic data by segments (brand, non-brand, all traffic, and custom user-created traffic segments), by specific keywords and by specific landing pages.  `Keyword & website research data`: Data for any keyword in SEOmonitor's Research database – any domain-level aggregated search, SERP, and ranking data, and keyword-level and keyword list-level metrics, for the tracked website and for any competitor in top 100.  `Forecast data`: Overview data and details for specific Forecast Scenarios and Objectives, and keyword-level forecast data.  `Website content data`: Data related to content optimization opportunities of the tracked website, including landing page and keyword data for each of the content opportunities categories in SEOmonitor's Content Audit platform (Positive and negative correlations with Visibility, Cannibalization issues, Pages serving too many keywords, Keywords with missing pages, Suboptimal keyword inclusion in the title or H1 or page content, Pages with missing title or H1).   `Getting Started`  Log into your SEOmonitor account and retrieve your unique API Token (Account Settings > Edit Profile).  Check out the `quick start guide` to make your first API call.  Read through the `authentication guide` to learn how to properly authenticate your API requests.   `Libraries and SDKs`  SEOmonitor API uses HTTP protocol, which allows the application of our API to almost all programming languages. All the responses are returned in JSON format by default.  For convenience, we offer client libraries for popular programming languages:  JavaScript PHP Python Java   `Support`  Need help using the API, or have general inquiries? Please contact our support team.  For more information about the SEOmonitor platform, you can visit www.seomonitor.com.   `Changelog`      This is the first version of API 3.0. The Changelog page will be updated as we continue to develop new features and improvements.     `Quick Start Guide`  This guide will walk you through making your first API call.  `Get your API key`  First, you'll need to get an API key:      1. Log in to your SEOmonitor account (https://app.seomonitor.com)     2. Go to Account Settings > Edit Profile     3. Copy the API Token to use in your API requests  Note: Clicking `Regenerate API Token` will overwrite the current key and you will lose access if you or other users are currently using it.   `Make a request`  Next, we'll use cURL to make a request to get Tracked Campaigns details:      curl --request GET \\     --url https://apix.seomonitor.com/dashboard/v3.0/campaigns/tracked \\     --header 'Accept: application/json' \\     --header 'Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZW9tb25pdG9yLmNvbSIsImlhdCI6MTY1Mjc4NTcwNCwidXNlcl9pZCI6IjY2NTI5In0.2_l9e7ohs9QHbwmr48mIoEF-QxZHNPFiAzJbMk00jcA'  This will retrieve the Tracked Campaigns data for an SEOmonitor account having the following API Token:      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZW9tb25pdG9yLmNvbSIsImlhdCI6MTY1Mjc4NTcwNCwidXNlcl9pZCI6IjY2NTI5In0.2_l9e7ohs9QHbwmr48mIoEF-QxZHNPFiAzJbMk00jcA'   Let's break down the parts of the request:      - `--request GET` - Make a GET request     - `--url` - The API endpoint URL     - `--header` - Adds the Authorization header with your API key   Handle the response  The API will return a JSON response like this:      {       \"campaign_info\": {         \"id\": \"74516\",         \"name\": \"Asos.com\",          \"company\": \"Asos\",         \"company_id\": \"51256\",         \"domain\": \"www.asos.com\",         \"keyword_count\": 588,          \"date_created\": \"2023-04-25\",         \"location\": \"United Kingdom\",         \"currency\": \"EUR\",         \"mrr\": 3000       },       \"visibility\": {         \"desktop\": {           \"latest\": 0.28,           \"trend_7days\": 0.2,           \"trend_30days\": 0.2         },         \"mobile\": {           \"latest\": 0.27,            \"trend_7days\": 0.2,           \"trend_30days\": 0.2         }       },       \"multiple_locations\": [         {           \"campaign_id\": 12746,           \"location\": \"London, United Kingdom\",           \"visibility\": {             \"desktop\": {               \"latest\": 0.32,               \"trend_7days\": 0.02               \"trend_30days: 0.1               },             \"mobile\": {               \"latest\": 0.33,               \"trend\": 0.03               \"trend_30days\": 0.1                 }             }           }         }       ],       \"health_status\": \"healthy\",       \"objective_status\": {         \"actual_sessions\": 78400,         \"estimated_sessions\": 78400,           \"performance\": 1,         \"status\": \"on_track\",         \"start_month\": \"Jun, 2023\",          \"end_month\": \"Jul, 2024\"       },       \"reporting_status\": \"submitted\",       \"account_manager\": \"Jo Hart\"     }  And that's it! You just made your first API call. Check out the rest of the API reference documentation to see what else you can build.  `Best practices`      - Keep your API key private – do not share your key publicly.     - Do not include your key directly in code that you distribute – use environment variables instead.     - Regenerate your key periodically for improved security.     - Limit API key access to only required endpoints if possible.  `Revoking API keys`  If your API key is compromised, you can revoke it by regenerating the API Token in your SEOmonitor Account Settings. This will immediately invalidate the current key so further requests can't be made.  For any other issues with authentication, contact our support team.   `Retrieve the IDs of the company, campaigns, keywords and keyword groups`  The unique IDs of your company, campaigns, keywords, or keyword groups can be retrieved either from the specific URLs of the platform, or from specific API endpoint responses. Further below you'll find details on these alternatives.   `Company ID`  The company ID can only be retrieved from the platform. Follow these steps:      1. Log in to your SEOmonitor account (https://app.seomonitor.com)     2. Go to Account Settings > Billing     3. In the Billing section, the platform URL contains the company ID.     E.g.: \"app.seomonitor.com/v2/account/company/51244/billing\" – in this example, the company ID is \"51244\"   `Campaign ID`  To retrieve the campaign ID from the platform, follow these steps:       1. Log in to your SEOmonitor account (https://app.seomonitor.com)     2. Open the required campaign by clicking on its name in the Agency Dashboard.     3. By default, the campaign opens in the Rank Tracker view. The platform URL contains the company ID.     E.g.: \"https://app.seomonitor.com/v2/72416/manage/strategy/0/desktop/keywords?timeframe=2023-09-04%3A2023-10-04\" – in this example, the campaign ID is \"72416\".  To retrieve the campaign ID through the API, make a call through the `Get Tracked Campaigns Details endpoint`. The response will contain the details of the requested Tracked Campaigns, including their IDs, which you can further use in other endpoint requests.   `Keyword ID`  To retrieve the keyword ID from the platform, follow these steps:       1. Log in to your SEOmonitor account (https://app.seomonitor.com)     2. Open the required campaign and click on the required keyword.     3. The platform URL for the keyword view (Keyword Sidebar) contains the keyword ID.     E.g.: \"https://app.seomonitor.com/v2/72416/manage/strategy/0/desktop/keywords?timeframe=2023-09-04%3A2023-10-04&ksid=7063139\" – in this example, the keyword ID is \"7063139\"   To retrieve the keyword ID through the API, make a call through the `Get Keyword Data endpoint`. The response will contain the details of the requested keywords, including their IDs, which you can further use in other endpoint requests.   `Keyword Group ID`      1. Log in to your SEOmonitor account (https://app.seomonitor.com)     2. Open the required campaign and click on the required keyword group (Groups side-menu).     3. The platform URL for the keyword group view contains the keyword ID.     E.g.: \"https://app.seomonitor.com/v2/72416/manage/strategy/69976/desktop/keywords?timeframe=2023-09-04%3A2023-10-04\" – in this example, the keyword group ID is \"69976\"  To retrieve the keyword group ID through the API, make a call through the `Get Groups List endpoint`. The response will contain the details of the requested keyword groups, including their IDs, which you can further use in other endpoint requests.   `Forecast ID for Scenarios or Objectives`      1. Log in to your SEOmonitor account (https://app.seomonitor.com)     2. Open the required campaign and go to Forecast from the main menu (top).     3. Select a Scenario or the Objective (if set). The platform URL for the specific scenario contains the forecast ID.     E.g.: \"https://app.seomonitor.com/v2/forecast/118794/3788\" – in this example, the forecast ID is \"3788\"   To retrieve the forecast ID through the API, make a call through the`Get Forecast Scenarios endpoint`. The response will contain the details of the requested Scenario or Objective, including their IDs, which you can further use in other endpoint requests.   `SERP Feature Abbreviations`  The returned data for some endpoints will contain SERP feature names in abbreviated form.  The returned values for SERP features are abbreviated as follows:      - \"adt\": Ads Pack Top     - \"def\": Definitions      - \"dir\": Directions      - \"fsn\": Featured Snippet      - \"flt\": Flights      - \"htl\": Hotels      - \"img\": Images Pack      - \"job\": Jobs      - \"kng\": Knowledge Graph      - \"geo\": Local Pack      - \"shp\": Product listing      - \"rcp\": Recipes      - \"qns\": Questions      - \"new\": Top Stories      - \"vid\": Video Carousel      - \"app\": Apps    `Rate Limits`  There are request limits in place to prevent abuse and ensure fair usage.   Exceeding the request limits will lead to HTTP 429 responses. If you need higher limits, contact our support team.   `Limits & Quotas`      -------------------------------------------------------------------------     |Limit                                    |  Number of requests              -------------------------------------------------------------------------     |Maximum requests per second              |  10                              -------------------------------------------------------------------------     |Maximum rows per request (Request Quota) |  1000                            -------------------------------------------------------------------------     |Daily Quota                              |  10 000                          -------------------------------------------------------------------------   `Exceeding Limits`  If you exceed the rate limits, you will receive a 429 Too Many Requests response.  Daily Quota Exceeded      {       \"error\": {         \"message\": \"Daily quota exceeded\",         \"details\": [           \"You have exceeded the allowed daily requests\"          ]       }     }  Details:  This error message indicates that the request exceeds the rate limits for daily requests. Retry the request after some delay.  Rate Limit Exceeded      {       \"error\": {         \"message\": \"Rate limit exceeded\",         \"details\": [           \"You have exceeded the allowed requests per second\"          ]       }     }  Details:  This error message indicates that the request exceeds the rate limits for requests per second. Retry the request after some delay.   `Increasing Limits`  The default limits allow most normal API usage patterns. However, if you need higher limits, please contact our support team.    Provide details on:      - Your specific use case      - The endpoints you are using     - The increased limits you are looking for  We will review your request and adjust limits where appropriate   `Need Higher Limits?`  For most use cases, the default limits are sufficient. But if you require higher limits, please contact our support team. We will review your use case and adjust limits where appropriate.   `Errors`  SEOmonitor API uses standard HTTP response codes to indicate the success or failure of API requests.   HTTP Status Codes      ----------------------------------------------------------------------------------     | Code  | Description                                                                 ----------------------------------------------------------------------------------     | 200   | Success                                                                     ----------------------------------------------------------------------------------     | 400   | Bad request - the request was malformed or missing required parameters      ----------------------------------------------------------------------------------      | 401   | Unauthorized - invalid or missing API key                                   ----------------------------------------------------------------------------------     | 403   | Forbidden - API key does not have access to the requested resource          ----------------------------------------------------------------------------------     | 404   | Not found - the requested resource does not exist                           ----------------------------------------------------------------------------------     | 429   | Too many requests - rate or quota limit exceeded                            ----------------------------------------------------------------------------------     | 500   | Internal server error - an unexpected error on the API server               ----------------------------------------------------------------------------------     | 50x   | Errors specific to various endpoints                                        ----------------------------------------------------------------------------------   `Error Response Format`  Error responses will be returned in JSON format:      {       \"error\": {         \"message\": \"Rate limit exceeded\",         \"details\": [           \"You have exceeded the allowed requests per second\"          ]       }     }   The error object contains:  - `message` - A general error message   - `details` - More specific details about the error   `Common Errors`  401 Unauthorized      {       \"error\": {         \"message\": \"Invalid authentication\",         \"details\": [           \"The API key provided is invalid\"          ]       }     }   Details:   This error message indicates there is a problem with the API key:  - The API key is missing from the request  - The key is invalid or incorrect  - The key is expired or revoked   Check that you are sending the correct API key in the Authorization header.  403 Forbidden      {       \"error\": {         \"message\": \"Forbidden access\",         \"details\": [           \"Your API key does not have access to the requested data\"          ]       }     }  Details:  This error message indicates that the API key being used does not have access to perform the requested operation. Ensure the key has the required scopes enabled.   404 Not Found      {       \"error\": {         \"message\": \"Data not found\",         \"details\": [           \"The requested data does not exist.\"          ]       }     }   Details:  This error message indicates that the object specified by the request does not exist. For example, requesting a keyword that is not in your SEOmonitor account.   429 Too Many Requests   Daily Quota Exceeded      {       \"error\": {         \"message\": \"Daily quota exceeded\",         \"details\": [           \"You have exceeded the allowed daily requests\"          ]       }     }   Details:  This error message indicates that the request exceeds the rate limits for daily requests. Retry the request after some delay.   Rate Limit Exceeded      {       \"error\": {         \"message\": \"Rate limit exceeded\",         \"details\": [           \"You have exceeded the allowed requests per second\"          ]       }     }   Details:  This error message indicates that the request exceeds the rate limits for requests per second. Retry the request after some delay.   500 Internal Server Error       {       \"error\": {         \"message\": \"Internal server error\",         \"details\": [           \"The server encountered an error while processing your requests\"          ]       }     }   Details:  This error message indicates that an unexpected error occurred on the API server. Try the request again later. If the issue persists, contact support.   50X Endpoint-specific errors  You may encounter errors on specific endpoint requests – these are listed and explained under each endpoint page.   Support  If you have any questions about API errors, please contact our support team.   `Changelog`  Version 3.0 (current)   Release Date: ?  This is the first version of the API 3.0.  
+ *
+ * OpenAPI spec version: 1.0.0
+ * Contact: customer.success@seomonitor.com
+ *
+ * NOTE: This class is auto generated by the swagger code generator program.
+ * https://github.com/swagger-api/swagger-codegen.git
+ * Do not edit the class manually.
+ */
+
+package io.swagger.client.model;
+
+import java.util.Objects;
+import java.util.Arrays;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.client.model.KeywordLandingPages;
+import io.swagger.client.model.KeywordRankingData;
+import io.swagger.client.model.KeywordSerpData;
+import io.swagger.client.model.KeywordTrafficData;
+import io.swagger.client.model.Opportunity;
+import io.swagger.client.model.SearchData;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.IOException;
+/**
+ * KeywordDetail
+ */
+
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2023-12-04T14:33:47.208100+02:00[Africa/Johannesburg]")
+
+public class KeywordDetail {
+  @SerializedName("keyword_id")
+  private Integer keywordId = null;
+
+  @SerializedName("keyword")
+  private String keyword = null;
+
+  @SerializedName("main_keyword_id")
+  private Integer mainKeywordId = null;
+
+  @SerializedName("search_intent")
+  private String searchIntent = null;
+
+  @SerializedName("labels")
+  private String labels = null;
+
+  @SerializedName("groups")
+  private String groups = null;
+
+  @SerializedName("serp_data")
+  private KeywordSerpData serpData = null;
+
+  @SerializedName("search_data")
+  private SearchData searchData = null;
+
+  @SerializedName("ranking_data")
+  private KeywordRankingData rankingData = null;
+
+  @SerializedName("landing_pages")
+  private KeywordLandingPages landingPages = null;
+
+  @SerializedName("traffic_data")
+  private KeywordTrafficData trafficData = null;
+
+  @SerializedName("opportunity")
+  private Opportunity opportunity = null;
+
+  public KeywordDetail keywordId(Integer keywordId) {
+    this.keywordId = keywordId;
+    return this;
+  }
+
+   /**
+   * The unique ID used to identify and reference the keyword in the system. It can be stored and used in other endpoints for filtering.
+   * @return keywordId
+  **/
+  @Schema(example = "7882029", description = "The unique ID used to identify and reference the keyword in the system. It can be stored and used in other endpoints for filtering.")
+  public Integer getKeywordId() {
+    return keywordId;
+  }
+
+  public void setKeywordId(Integer keywordId) {
+    this.keywordId = keywordId;
+  }
+
+  public KeywordDetail keyword(String keyword) {
+    this.keyword = keyword;
+    return this;
+  }
+
+   /**
+   * The exact keyword phrase.
+   * @return keyword
+  **/
+  @Schema(example = "victoria secret", description = "The exact keyword phrase.")
+  public String getKeyword() {
+    return keyword;
+  }
+
+  public void setKeyword(String keyword) {
+    this.keyword = keyword;
+  }
+
+  public KeywordDetail mainKeywordId(Integer mainKeywordId) {
+    this.mainKeywordId = mainKeywordId;
+    return this;
+  }
+
+   /**
+   * The ID of the main keyword, if the current keyword is aggregated under another keyword as its close variation.
+   * @return mainKeywordId
+  **/
+  @Schema(example = "769446", description = "The ID of the main keyword, if the current keyword is aggregated under another keyword as its close variation.")
+  public Integer getMainKeywordId() {
+    return mainKeywordId;
+  }
+
+  public void setMainKeywordId(Integer mainKeywordId) {
+    this.mainKeywordId = mainKeywordId;
+  }
+
+  public KeywordDetail searchIntent(String searchIntent) {
+    this.searchIntent = searchIntent;
+    return this;
+  }
+
+   /**
+   * The search intent of the keyword.  Possible values: &#x60;informational&#x60;, &#x60;commercial&#x60;, or &#x60;transactional&#x60;.
+   * @return searchIntent
+  **/
+  @Schema(example = "commercial", description = "The search intent of the keyword.  Possible values: `informational`, `commercial`, or `transactional`.")
+  public String getSearchIntent() {
+    return searchIntent;
+  }
+
+  public void setSearchIntent(String searchIntent) {
+    this.searchIntent = searchIntent;
+  }
+
+  public KeywordDetail labels(String labels) {
+    this.labels = labels;
+    return this;
+  }
+
+   /**
+   * The label associated with the keyword, either manually or automatically applied, that indicate specific attributes or characteristics of a keyword.  Possible values: automatic labels: &#x60;misspelled&#x60;, &#x60;low relevance&#x60;, &#x60;brands&#x60;, &#x60;localized&#x60;. for keywords labeled as &#x60;seasonal&#x60; in the platform, the endpoint will return one of the following possible values: &#x60;in_full_season&#x60;, &#x60;out_of_season&#x60;, &#x60;season_approaching&#x60;. custom labels: User-defined label name. 
+   * @return labels
+  **/
+  @Schema(example = "in_full_season", description = "The label associated with the keyword, either manually or automatically applied, that indicate specific attributes or characteristics of a keyword.  Possible values: automatic labels: `misspelled`, `low relevance`, `brands`, `localized`. for keywords labeled as `seasonal` in the platform, the endpoint will return one of the following possible values: `in_full_season`, `out_of_season`, `season_approaching`. custom labels: User-defined label name. ")
+  public String getLabels() {
+    return labels;
+  }
+
+  public void setLabels(String labels) {
+    this.labels = labels;
+  }
+
+  public KeywordDetail groups(String groups) {
+    this.groups = groups;
+    return this;
+  }
+
+   /**
+   * The group_ids of the groups this keyword is included in.
+   * @return groups
+  **/
+  @Schema(example = "\"1234,12345\"", description = "The group_ids of the groups this keyword is included in.")
+  public String getGroups() {
+    return groups;
+  }
+
+  public void setGroups(String groups) {
+    this.groups = groups;
+  }
+
+  public KeywordDetail serpData(KeywordSerpData serpData) {
+    this.serpData = serpData;
+    return this;
+  }
+
+   /**
+   * Get serpData
+   * @return serpData
+  **/
+  @Schema(description = "")
+  public KeywordSerpData getSerpData() {
+    return serpData;
+  }
+
+  public void setSerpData(KeywordSerpData serpData) {
+    this.serpData = serpData;
+  }
+
+  public KeywordDetail searchData(SearchData searchData) {
+    this.searchData = searchData;
+    return this;
+  }
+
+   /**
+   * Get searchData
+   * @return searchData
+  **/
+  @Schema(description = "")
+  public SearchData getSearchData() {
+    return searchData;
+  }
+
+  public void setSearchData(SearchData searchData) {
+    this.searchData = searchData;
+  }
+
+  public KeywordDetail rankingData(KeywordRankingData rankingData) {
+    this.rankingData = rankingData;
+    return this;
+  }
+
+   /**
+   * Get rankingData
+   * @return rankingData
+  **/
+  @Schema(description = "")
+  public KeywordRankingData getRankingData() {
+    return rankingData;
+  }
+
+  public void setRankingData(KeywordRankingData rankingData) {
+    this.rankingData = rankingData;
+  }
+
+  public KeywordDetail landingPages(KeywordLandingPages landingPages) {
+    this.landingPages = landingPages;
+    return this;
+  }
+
+   /**
+   * Get landingPages
+   * @return landingPages
+  **/
+  @Schema(description = "")
+  public KeywordLandingPages getLandingPages() {
+    return landingPages;
+  }
+
+  public void setLandingPages(KeywordLandingPages landingPages) {
+    this.landingPages = landingPages;
+  }
+
+  public KeywordDetail trafficData(KeywordTrafficData trafficData) {
+    this.trafficData = trafficData;
+    return this;
+  }
+
+   /**
+   * Get trafficData
+   * @return trafficData
+  **/
+  @Schema(description = "")
+  public KeywordTrafficData getTrafficData() {
+    return trafficData;
+  }
+
+  public void setTrafficData(KeywordTrafficData trafficData) {
+    this.trafficData = trafficData;
+  }
+
+  public KeywordDetail opportunity(Opportunity opportunity) {
+    this.opportunity = opportunity;
+    return this;
+  }
+
+   /**
+   * Get opportunity
+   * @return opportunity
+  **/
+  @Schema(description = "")
+  public Opportunity getOpportunity() {
+    return opportunity;
+  }
+
+  public void setOpportunity(Opportunity opportunity) {
+    this.opportunity = opportunity;
+  }
+
+
+  @Override
+  public boolean equals(java.lang.Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    KeywordDetail keywordDetail = (KeywordDetail) o;
+    return Objects.equals(this.keywordId, keywordDetail.keywordId) &&
+        Objects.equals(this.keyword, keywordDetail.keyword) &&
+        Objects.equals(this.mainKeywordId, keywordDetail.mainKeywordId) &&
+        Objects.equals(this.searchIntent, keywordDetail.searchIntent) &&
+        Objects.equals(this.labels, keywordDetail.labels) &&
+        Objects.equals(this.groups, keywordDetail.groups) &&
+        Objects.equals(this.serpData, keywordDetail.serpData) &&
+        Objects.equals(this.searchData, keywordDetail.searchData) &&
+        Objects.equals(this.rankingData, keywordDetail.rankingData) &&
+        Objects.equals(this.landingPages, keywordDetail.landingPages) &&
+        Objects.equals(this.trafficData, keywordDetail.trafficData) &&
+        Objects.equals(this.opportunity, keywordDetail.opportunity);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(keywordId, keyword, mainKeywordId, searchIntent, labels, groups, serpData, searchData, rankingData, landingPages, trafficData, opportunity);
+  }
+
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("class KeywordDetail {\n");
+    
+    sb.append("    keywordId: ").append(toIndentedString(keywordId)).append("\n");
+    sb.append("    keyword: ").append(toIndentedString(keyword)).append("\n");
+    sb.append("    mainKeywordId: ").append(toIndentedString(mainKeywordId)).append("\n");
+    sb.append("    searchIntent: ").append(toIndentedString(searchIntent)).append("\n");
+    sb.append("    labels: ").append(toIndentedString(labels)).append("\n");
+    sb.append("    groups: ").append(toIndentedString(groups)).append("\n");
+    sb.append("    serpData: ").append(toIndentedString(serpData)).append("\n");
+    sb.append("    searchData: ").append(toIndentedString(searchData)).append("\n");
+    sb.append("    rankingData: ").append(toIndentedString(rankingData)).append("\n");
+    sb.append("    landingPages: ").append(toIndentedString(landingPages)).append("\n");
+    sb.append("    trafficData: ").append(toIndentedString(trafficData)).append("\n");
+    sb.append("    opportunity: ").append(toIndentedString(opportunity)).append("\n");
+    sb.append("}");
+    return sb.toString();
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(java.lang.Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
+
+}
