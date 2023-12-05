@@ -2,7 +2,7 @@
 
 SEOmonitor API Documentation
 - API version: 3.0.0
-- 
+
 For more information, please visit [https://www.seomonitor.com/](https://www.seomonitor.com/)
 
 ## Requirements
