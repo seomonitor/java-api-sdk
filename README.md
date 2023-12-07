@@ -103,7 +103,7 @@ public class CampaignsApiExample {
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://apix.seomonitor.com*
+All URIs are relative to *https://apigw.seomonitor.com/v3*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
